@@ -26,21 +26,17 @@
 <p class="text center">{{timer}}</p>
 
 {{#if isHost}}
-
 <div class="player_box" id="my_box">
   <h3>{{host.username}} (HOST)</h3>
 </div>
-
 {{else}}
-
-<div class="player_box" id="my_box">
-  <h3>{{me.username}}</h3>
-</div>
-
 <div class="player_box">
   <h3>{{host.username}} (HOST)</h3>
 </div>
 
+<div class="player_box" id="my_box">
+  <h3>{{me.username}}</h3>
+</div>
 {{/if}}
 
 {{#each others}}

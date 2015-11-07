@@ -59,7 +59,7 @@ router.post('/join', function(req, res, next) {
   newPlayer.save(function() {
     Session.findOne({_id: req.body.session}, function(err, session){
       //console.log("SESSION_ID MADE: ", req.body.session);
-      if (err) res.redirect('/error?type=notfound');
+      if (err || session == undefined) res.redirect('/error?type=notfound');
       else if (session.num_players >= 4) res.redirect('/error?type=full');
       else if (session.players.map(function(e) { return e.username; }).indexOf(req.body.username) > -1) res.redirect('/game/invite/'+req.body.session+"?error=taken");
       else {
@@ -100,9 +100,9 @@ router.get('/join/:session_id', function(req, res, next) {
 
       console.log("HOST: ", host_player);
       console.log(session.players);
-      var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username; });
+      var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username && e.username !== my_player.username; });
       console.log("OTHERS: ", other_players);
-      res.render('play', { title: 'Puzzle With Me', isHost: false, players: session.players });
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players });
     }
   });
 });
