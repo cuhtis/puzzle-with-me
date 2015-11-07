@@ -1,5 +1,8 @@
 <h2 class="title center">WAITING</h2>
 
-<!--{{#if user_session_id == this}} then display:
-<a href="/" class="button center">Ready</a>
-{{#else}} <p class="text center">Waiting for {{name}}...</p>-->
+{{if user_session_id == this}}
+	<a href="/" class="button center">Ready</a>
+{{/if}}
+{{else}} 
+	<p class="text center">Waiting for {{name}}...</p>
+{{/else}}
