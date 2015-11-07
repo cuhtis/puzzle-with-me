@@ -77,8 +77,31 @@ router.post('/join', function(req, res, next) {
 
 router.get('/join/:session_id', function(req, res, next) {
   Session.findOne({_id: req.params.session_id}, function(err, session, count) {
-    if (err) res.redirect('/error?type=notfound');
+    console.log("SESSION_ID: ", req.params.session_id);
+    console.log("RESULTS: ", session);
+    if (err || session == undefined) res.redirect('/error?type=notfound');
     else {
+      var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
+      //console.log(session, req.sessionID);
+      console.log("SESSION: ", req.session);
+
+      // FIND INDEX OF REQ PLAYER MANUALLY
+      var my_index = -1; var cnt = 0;
+      session.players.forEach(function(player){
+        console.log("PLAYER LOOP: ", cnt, player);
+        if (player.username === req.session.username) { my_index = cnt; }
+        cnt++;
+      });
+      //var my_index = session.players.indexOf(req.session.username);
+      var host_player = session.players[0];
+      var my_player = session.players[my_index];
+      console.log("MY INDEX: ", my_index);
+      console.log("MY PLAYER: ", my_player);
+
+      console.log("HOST: ", host_player);
+      console.log(session.players);
+      var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username; });
+      console.log("OTHERS: ", other_players);
       res.render('play', { title: 'Puzzle With Me', isHost: false, players: session.players });
     }
   });
@@ -104,24 +127,15 @@ router.get('/host/:session_id', function(req, res, next) {
         cnt++;
       });
       //var my_index = session.players.indexOf(req.session.username);
+      var host_player = session.players[0];
       var my_player = session.players[my_index];
       console.log("MY INDEX: ", my_index);
       console.log("MY PLAYER: ", my_player);
-      
-      // FIND INDEX OF HOST PLAYER MANUALLY
-      my_index = -1; cnt = 0;
-      session.players.forEach(function(player){
-        console.log("PLAYER LOOP: ", cnt, player);
-        if (player.username === session.host) { my_index = cnt; }
-        cnt++;
-      });
-
-      console.log("MY INDEX: ", my_index);
-      var host_player = session.players[my_index];
 
       console.log("HOST: ", host_player);
-
-      var other_players = session.players.filter(function(e) { return e.username !== req.session.username; });
+      console.log(session.players);
+      var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username; });
+      console.log("OTHERS: ", other_players);
       res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players});
     }
   });
