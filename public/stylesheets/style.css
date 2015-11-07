@@ -18,8 +18,27 @@ body {
 }
 
 .player_box {
-  padding:10px;
-  margin:5px;
+  float: right;
+  width: 29%;
+  height:250px;
+  margin:2px;
+  border:2px solid #0099FF;
+}
+
+.riddle_box {
+  float: left;
+  width: 40%;
+  height:500px;
+  margin:2px;
+  border:2px solid #0099FF;
+}
+
+.empty_player_box {
+  float: right;
+  width: 29%;
+  height:250px;
+  margin:2px;
+  border:2px solid #0099FF;
   background-color: #aaaaaa;
 }
 
