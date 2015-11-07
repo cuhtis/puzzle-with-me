@@ -63,6 +63,11 @@ app.get('/rules', function(req, res, next) {
   res.render('rules', { title: 'Rules' });
 });
 
+app.get('/quit', function(req, res, next) {
+  req.session.activeSession = false;
+  res.redirect('/');
+});
+
 app.get('/error', function(req, res, next) {
   var errorText = "Unknown error.";
   if (req.query.type === "notfound") errorText = "Session not found.";
