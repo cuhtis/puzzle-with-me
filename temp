@@ -1,0 +1,89 @@
+<h1 class="title center">Puzzle With Me</h1>
+
+{{#if isHost}}
+  <!-- Target -->
+  <input id="copyURLText" value={{copyURL}}>
+
+  <!-- Trigger -->
+ <button class="btn" data-clipboard-target="#copyURLText">
+    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="13" alt="Copy to clipboard">
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
+  <script>
+    var clipboard = new Clipboard('.btn'); 
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+{{/if}}
+
+<p class="text center">{{timer}}</p>
+
+<div class="upper-right">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="upper-left">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="bottom-right">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="bottom-left">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+-->

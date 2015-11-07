@@ -1,7 +1,7 @@
 body, html {
   height:100%;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #fafafa;
+  color: #000000;
 }
 
 body {
@@ -15,6 +15,16 @@ body {
 .content {
   padding:10px;
   background-color: #fafafa;
+}
+
+.player_box {
+  padding:10px;
+  margin:5px;
+  background-color: #aaaaaa;
+}
+
+.error_text {
+  color: #e34444;
 }
 
 h1, h2 {
@@ -44,8 +54,10 @@ a:visited {
 }
 
 ul, li {
+  margin: 20px;
   color: black;
-  font-size: 30px;
+  text-align: left;
+  font-size: 18px;
 }
 
 ul {

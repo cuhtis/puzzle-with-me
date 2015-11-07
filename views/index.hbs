@@ -1,4 +1,9 @@
 <h1 class="title">{{title}}</h1>
+
+{{#if hasError}}
+<h3 class="error_text">Error: {{error}}</h3>
+{{/if}}
+
 <p class="text">Challenge your friends in a test of wit!</p>
 
 <a href="/rules" class="btn btn-default btn-lg">Rules</a>

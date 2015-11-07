@@ -1,109 +1,52 @@
-<h2 class="title center">WAITING</h2>
+<h1 class="title center">Puzzle With Me</h1>
 
-<div class="upper-right">
-  <h4>{{name}}</h4>
-  {{#if user_session_id == this}}
-    {{#if user_session_id == game_session.owner_id}}
-      {{#if game_session.allReady}}
-        <a href="/play" class="big_button">START</a>
-      {{else}}
-        <button type="button" disabled class="disabled">START</button>
-      {{/if}}
-    {{else}}
-      {{#if !user_session_id.ready}}
-        <form method="PUT">
-          <input type="submit" value="true">READY
-        </form>
-      {{else}}
-        <p>Waiting for game owner to start...</p>
-      {{/if}}
-    {{/if}}
-  {{else}}
-    {{#if user_session_id.ready}}
-      <p>Ready to Go...</p>
-    {{else}}
-      <p>Not Ready!</p>
-    {{/if}}
-  {{/if}}
+<h3>{{host.username}}'s Game</h3>
+
+{{#if isHost}}
+  <!-- Target -->
+  <input id="copyURLText" value={{copyURL}}>
+
+  <!-- Trigger -->
+ <button class="btn" data-clipboard-target="#copyURLText">
+    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="13" alt="Copy to clipboard">
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
+  <script>
+    var clipboard = new Clipboard('.btn'); 
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+{{/if}}
+
+<p class="text center">{{timer}}</p>
+
+{{#if isHost}}
+
+<div class="player_box" id="my_box">
+  <h3>{{me.username}} (HOST)</h3>
 </div>
 
-<div class="upper-left">
-  <h4>{{name}}</h4>
-  {{#if user_session_id == this}}
-    {{#if user_session_id == game_session.owner_id}}
-      {{#if game_session.allReady}}
-        <a href="/play" class="big_button">START</a>
-      {{else}}
-        <button type="button" disabled class="disabled">START</button>
-      {{/if}}
-    {{else}}
-      {{#if !user_session_id.ready}}
-        <form method="PUT">
-          <input type="submit" value="true">READY
-        </form>
-      {{else}}
-        <p>Waiting for game owner to start...</p>
-      {{/if}}
-    {{/if}}
-  {{else}}
-    {{#if user_session_id.ready}}
-      <p>Ready to Go...</p>
-    {{else}}
-      <p>Not Ready!</p>
-    {{/if}}
-  {{/if}}
+{{else}}
+
+<div class="player_box" id="my_box">
+  <h3>{{me.username}}</h3>
 </div>
 
-<div class="bottom-right">
-  <h4>{{name}}</h4>
-  {{#if user_session_id == this}}
-    {{#if user_session_id == game_session.owner_id}}
-      {{#if game_session.allReady}}
-        <a href="/play" class="big_button">START</a>
-      {{else}}
-        <button type="button" disabled class="disabled">START</button>
-      {{/if}}
-    {{else}}
-      {{#if !user_session_id.ready}}
-        <form method="PUT">
-          <input type="submit" value="true">READY
-        </form>
-      {{else}}
-        <p>Waiting for game owner to start...</p>
-      {{/if}}
-    {{/if}}
-  {{else}}
-    {{#if user_session_id.ready}}
-      <p>Ready to Go...</p>
-    {{else}}
-      <p>Not Ready!</p>
-    {{/if}}
-  {{/if}}
+<div class="player_box">
+  <h3>{{host.username}} (HOST)</h3>
 </div>
 
-<div class="bottom-left">
-  <h4>{{name}}</h4>
-  {{#if user_session_id == this}}
-    {{#if user_session_id == game_session.owner_id}}
-      {{#if game_session.allReady}}
-        <a href="/play/{{game_id}}" class="big_button">START</a>
-      {{else}}
-        <button type="button" disabled class="disabled">START</button>
-      {{/if}}
-    {{else}}
-      {{#if !user_session_id.ready}}
-        <form method="PUT">
-          <input type="submit" value="true">READY
-        </form>
-      {{else}}
-        <p>Waiting for game owner to start...</p>
-      {{/if}}
-    {{/if}}
-  {{else}}
-    {{#if user_session_id.ready}}
-      <p>Ready to Go...</p>
-    {{else}}
-      <p>Not Ready!</p>
-    {{/if}}
-  {{/if}}
+{{/if}}
+
+{{#each others}}
+<div class="player_box">
+ <h3>{{this.username}}</h3> 
 </div>
+{{/each}}
+
+<a href="/" class="btn btn-default btn-lg">Quit</a>
