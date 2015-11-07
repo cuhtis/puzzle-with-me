@@ -81,14 +81,9 @@ router.get('/join/:session_id', function(req, res, next) {
     console.log("RESULTS: ", session);
     if (err || session == undefined) res.redirect('/error?type=notfound');
     else {
-<<<<<<< 0b27b948751ae017ea8db21c462e2876866870d2
-
       var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
       //console.log(session, req.sessionID);
       console.log("SESSION: ", req.session);
-
-=======
->>>>>>> edits
       // FIND INDEX OF REQ PLAYER MANUALLY
       var my_index = -1; var cnt = 0;
       session.players.forEach(function(player){
@@ -97,7 +92,6 @@ router.get('/join/:session_id', function(req, res, next) {
         cnt++;
       });
       //var my_index = session.players.indexOf(req.session.username);
-<<<<<<< 0b27b948751ae017ea8db21c462e2876866870d2
       var host_player = session.players[0];
       var my_player = session.players[my_index];
       console.log("MY INDEX: ", my_index);
@@ -116,27 +110,6 @@ router.get('/join/:session_id', function(req, res, next) {
       }
 
       res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players, hasUserName: hasUserName });
-=======
-      var my_player = session.players[my_index];
-      console.log("MY INDEX: ", my_index);
-      console.log("MY PLAYER: ", my_player);
-      
-      // FIND INDEX OF HOST PLAYER MANUALLY
-      my_index = -1; cnt = 0;
-      session.players.forEach(function(player){
-        console.log("PLAYER LOOP: ", cnt, player);
-        if (player.username === session.host) { my_index = cnt; }
-        cnt++;
-      });
-
-      console.log("MY INDEX: ", my_index);
-      var host_player = session.players[my_index];
-
-      console.log("HOST: ", host_player);
-
-      var other_players = session.players.filter(function(e) { return e.username !== req.session.usernamei && e.username !== session.host; });
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, me: my_player, host: host_player, others: session.players });
->>>>>>> edits
     }
   });
 });
