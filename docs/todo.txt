@@ -1,5 +1,6 @@
 /
 	-Host page
+		-enter name field
 		-button "Place bet with Venmo"
 			-> button "play"
 			-> button "change bet"
@@ -7,6 +8,7 @@
 		-rules -> /rules
 /start
 	-page received from URL paste
+		-enter name field
 		-button "Place bet with Venmo"
 			-> button "play"
 			-> button "change bet"

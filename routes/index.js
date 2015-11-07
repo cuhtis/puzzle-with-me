@@ -15,7 +15,7 @@ router.get('/wait', function(req, res, next) {
 });
 
 router.get('/rules', function(req, res, next) {
-  res.redirect('/');
+  res.render('rules');
 });
 
 router.get('/play', function(req, res, next) {
