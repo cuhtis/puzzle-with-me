@@ -109,7 +109,7 @@ router.get('/join/:session_id', function(req, res, next) {
         }
       }
 
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players, hasUserName: hasUserName });
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players, hasUserName: hasUserName });
     }
   });
 });
