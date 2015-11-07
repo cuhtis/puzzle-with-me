@@ -56,8 +56,31 @@ font-family: Tahoma;
 font-size: 20px;
 background: #0099FF;
 }
-input[type=text] {
+input[type=text],  [type=number]{
     width: 30%;
     line-height: 100%;
     font-size: 20px;
+}
+
+hr{
+    height: 2px;
+    background-color:#ffffff;
+    color:#ffffff;
+  	border: 0 none;
+    background-image: linear-gradient(to left, rgba(0, 153, 255, 0), rgba(0, 153, 255, 1), rgba(0, 153, 255, 0));
+
+}
+
+hr.threeFifths{
+  width: 60%;
+}
+
+hr.sub_border{
+  height: 2px;
+  width: 20%;
+  border: 0 none;
+  background-color: #966401;
+  color: #966401;
+  width: 25%;
+  height:1px;
 }
