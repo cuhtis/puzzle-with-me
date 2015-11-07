@@ -3,4 +3,64 @@
 
 <div class="upper-right">
   <h4>{{name}}</h4>
-  {{#if}}
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="upper-left">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="bottom-right">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
+
+<div class="bottom-left">
+  <h4>{{name}}</h4>
+  <div class="puzzle">{{puzzle}}</div>
+  {{#if user_session_id == this}}
+    <form method="PUT">
+      <input type="text" name="answer"> <input type="submit">
+    </form>
+  {{else}}
+    {{#if user_session_id.answered}}
+      <p>has answered!</p>
+    {{else}}
+      <p>Waiting for an answer from {{name}}...</p>
+    {{/if}}
+  {{/if}}
+</div>
