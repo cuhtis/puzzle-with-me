@@ -143,8 +143,9 @@ app.post('/game/join', function(req, res, next) {
 });
 
 app.get('/game/join/:session_id', function(req, res, next) {
+  console.log("re-entering...");
   Session.findOne({_id: req.params.session_id}, function(err, session, count) {
-    if (err || session == undefined) res.redirect('/error?type=notfound');
+    if (err || session == undefined && req.session.username != undefined) res.redirect('/error?type=notfound');
     else {
       var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
       // FIND INDEX OF REQ PLAYER MANUALLY
@@ -202,21 +203,25 @@ app.get('/game/host/:session_id', function(req, res, next) {
 });
 
 app.post('/game/join/:session_id', function(req, res, next){
+  console.log("HELLOOOOO");
+  console.log(req.session.username);
+  console.log(req.params.session_id);
   Session.findOne({_id: req.params.session_id}, function(err, session){
-    var my_index = -1; var cnt = 0;
-    session.players.forEach(function(player){
-      if (player.username === req.session.username) { my_index = cnt; }
-      cnt++;
-    });
-    var my_player = session.players[my_index];
-    my_player.isReady = true;
-    
-    session.num_ready += 1;
+    Player.findOne({username: req.session.username}, function(err, player) {
+      player.ready = true;
+      session.num_ready += 1;
+      if (session.num_players == session.num_ready){
+        session.allReady = true;
+      }
 
-    if (session.num_players == session.num_ready){
-      session.allReady = true;
-    }
-    res.redirect("/");
+      player.save(function() {
+        session.save(function() {
+          console.log(player);
+          console.log(session);
+          res.redirect("/");
+        });
+      });
+    });
   });
 });
 
