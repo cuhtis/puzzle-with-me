@@ -113,7 +113,7 @@ router.get('/host/:session_id', function(req, res, next) {
   Session.findOne({_id: req.params.session_id}, function(err, session) {
     console.log("SESSION_ID: ", req.params.session_id);
     console.log("RESULTS: ", session);
-    if (err || session == undefined) res.redirect('/error?type=notfound');
+    if (err || session == undefined && req.session.username != undefined) res.redirect('/error?type=notfound');
     else {
       var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
       //console.log(session, req.sessionID);
