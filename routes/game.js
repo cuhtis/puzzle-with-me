@@ -102,7 +102,7 @@ router.get('/join/:session_id', function(req, res, next) {
       var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username && e.username !== my_player.username; });
       console.log("OTHERS: ", other_players);
 
-       var hasUserName = [false,false,false,false];
+      var hasUserName = [false,false,false,false];
       if(session){
         for (numPlayers = 0; numPlayers <= session.num_players-1; numPlayers++){
           hasUserName[numPlayers]=true;
@@ -142,7 +142,14 @@ router.get('/host/:session_id', function(req, res, next) {
       console.log(session.players);
       var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username; });
       console.log("OTHERS: ", other_players);
-      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players});
+      var hasUserName = [false,false,false,false];
+      if(session){
+        for (numPlayers = 0; numPlayers <= session.num_players-1; numPlayers++){
+          hasUserName[numPlayers]=true;
+        }
+      }
+
+      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players, hasUserName: hasUserName});
     }
   });
 });
