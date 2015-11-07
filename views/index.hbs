@@ -1,6 +1,15 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1 class="title center">{{title}}</h1>
+<p class="text center">Challenge your friends in a test of wit!</p>
 
-<div class>
+{{if unpaid}}
+<!-- venmo stuff-->
+{{/if}}
+
+{{if ready}}
+<div class="">
+<!-- edit venmo stuff -->
 <a href="/game" class="big_button">PLAY!</a>
 </div>
+{{/if}}
+
+<a href="/rules" class="button center">Rules</a>
