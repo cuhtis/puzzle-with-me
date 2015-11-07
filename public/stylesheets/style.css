@@ -14,7 +14,7 @@ body
 background-color: #fafafa;
 }
 h1, h2{
-color:#CCFFFF;
+color:#0099FF;
 }
 h1{
 font-size: 50px;
@@ -29,11 +29,11 @@ p{
 color: black;
 	}
 a {
-color: #CCFFFF;
+color: #0099FF;
 }
 
 a:visited {
-color: #CCFFFF;
+color: #0099FF;
 }
 
 ul, li{
@@ -44,6 +44,9 @@ font-size: 30px;
 ul{
 padding-left: 60px;
 }
+input{
+	color:black;
+}
 
 input[type=submit] {
 padding: 30px 50px;
@@ -51,10 +54,9 @@ border-radius: 5px;
 border: 0;
 font-family: Tahoma;
 font-size: 20px;
-background: #CCFFFF;
+background: #0099FF;
 }
 input[type=text] {
-	color:black;
     width: 30%;
     line-height: 100%;
     font-size: 20px;
