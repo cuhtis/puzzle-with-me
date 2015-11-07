@@ -39,15 +39,13 @@ router.get('/start', function(req, res, next) {
   res.redirect('/');
 });
 
-
-router.get('/wait/:game_id', function(req, res, next) {
-  res.render('wait', {game_id: game_id});
+router.get('/wait', function(req, res, next) {
+  res.render('wait',{});
 });
 
 router.get('/rules', function(req, res, next) {
   res.render('rules');
 });
-
 
 router.get('/play/:game_id', function(req, res, next) {
   res.redirect('/play');
@@ -57,6 +55,9 @@ router.get('/game/join/:game_id', function(req, res, next) {
   res.redirect('/wait/:game_id');
 });
 
+router.get('/play', function(req, res, next) {
+  res.render('play');
+});
 
 router.get('/result', function(req, res, next) {
   // PSUEDOCODE
