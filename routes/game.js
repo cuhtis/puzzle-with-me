@@ -15,7 +15,8 @@ router.post('/create', function(req, res, next) {
     username: req.body.username,
     isHost: true,
     paid: true,
-    betAmt: req.body.bet 
+    betAmt: req.body.bet,
+    isReady: false 
   });
 
   newHost.save(function() {
@@ -25,8 +26,14 @@ router.post('/create', function(req, res, next) {
       games: [],
       players: [newHost],
       bet_pot: req.body.bet,
-      active: false
+      active: false,
+      num_ready: 1,
+      allReady: false
     });
+
+    if (newSession.num_players > 1 && newSession.num_players == newSession.num_ready){
+      newSession.allReady = true;
+    }
 
     newSession.save(function(){
       req.session.username = req.body.username;
@@ -54,7 +61,8 @@ router.post('/join', function(req, res, next) {
     username: req.body.username,
     isHost: false,
     paid: true,
-    betAmt: req.body.bet 
+    betAmt: req.body.bet,
+    isReady: false
   });
   newPlayer.save(function() {
     Session.findOne({_id: req.body.session}, function(err, session){
@@ -109,7 +117,7 @@ router.get('/join/:session_id', function(req, res, next) {
         }
       }
 
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players, hasUserName: hasUserName });
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players, hasUserName: hasUserName, session: session });
     }
   });
 });
@@ -149,8 +157,30 @@ router.get('/host/:session_id', function(req, res, next) {
         }
       }
 
-      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players, hasUserName: hasUserName});
+      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players, hasUserName: hasUserName, session: session});
     }
+  });
+});
+
+
+router.post('/join/:session_id', function(req, res, next){
+  Session.findOne({_id: req.params.session_id}, function(err, session){
+    var my_index = -1; var cnt = 0;
+    session.players.forEach(function(player){
+      console.log("PLAYER LOOP: ", cnt, player);
+      if (player.username === req.session.username) { my_index = cnt; }
+      cnt++;
+    });
+    var my_player = session.players[my_index];
+    my_player.isReady = true;
+    
+    session.num_ready += 1;
+
+    if (session.num_players == session.num_ready){
+      session.allReady = true;
+    }
+    console.log(req.body);
+    res.redirect("/");
   });
 });
 

@@ -28,7 +28,7 @@ body {
 .riddle_box {
   float: left;
   width: 40%;
-  height:500px;
+  height:504px;
   margin:2px;
   border:2px solid #0099FF;
 }
@@ -44,6 +44,10 @@ body {
 
 .error_text {
   color: #e34444;
+}
+
+.formReady {
+  background: #0099FF;
 }
 
 h1, h2 {

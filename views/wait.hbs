@@ -32,8 +32,13 @@
 {{#if isHost}}
 <div class="player_box" id="my_box">
   <h3>{{host.username}} (HOST)</h3>
-  <a href="/" class="btn btn-default btn-lg">Start</a>
+  {{#if session.allReady}}
+      <a href="/play" class="big_button">Start</a>
+  {{else}}
+  		<button class="btn btn-default disabled btn-lg">Start</button>
+  {{/if}}
 </div>
+
 {{else}}
 <div class="player_box">
   <h3>{{host.username}} (HOST)</h3>
@@ -43,15 +48,24 @@
 
 <div class="player_box" id="my_box">
   <h3>{{me.username}} (ME)</h3>
-   <a href="/" class="btn btn-default btn-lg">Ready</a>
+  {{#if me.isReady}}
+  	<p>Waiting for game owner to start...</p>
+  {{else}}
+  	<form method="POST">
+    	<input type="submit" name="ready" value="Ready" class="btn btn-default btn-lg">
+  	</form>
+  {{/if}}
 </div>
 {{/if}}
 
 {{#each others}}
 <div class="player_box">
  <h3>{{this.username}}</h3>
- <!--disabled button-->
-  <a href="/" class="btn btn-default disabled btn-lg">Ready</a> 
+ {{#if this.isReady}}
+  	<p>Ready to Go...</p>
+  {{else}}
+  	<p>Not Ready!</p>
+  {{/if}}
 </div>
 {{/each}}
 
