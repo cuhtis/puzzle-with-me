@@ -86,7 +86,7 @@
   {{#if user_session_id == this}}
     {{#if user_session_id == game_session.owner_id}}
       {{#if game_session.allReady}}
-        <a href="/play" class="big_button">START</a>
+        <a href="/play/{{game_id}}" class="big_button">START</a>
       {{else}}
         <button type="button" disabled class="disabled">START</button>
       {{/if}}
