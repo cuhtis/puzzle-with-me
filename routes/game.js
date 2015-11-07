@@ -16,7 +16,7 @@ router.post('/create', function(req, res, next) {
     isHost: true,
     paid: true,
     betAmt: req.body.bet 
-  });
+  }); 
 
   newHost.save(function() {
     var newSession = new Session({
@@ -97,12 +97,13 @@ router.get('/join/:session_id', function(req, res, next) {
       var my_player = session.players[my_index];
       console.log("MY INDEX: ", my_index);
       console.log("MY PLAYER: ", my_player);
+      console.log("MY: ", my_player.username);
 
       console.log("HOST: ", host_player);
       console.log(session.players);
-      var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username && e.username !== my_player.username; });
+      var other_players = session.players.filter(function(e) { console.log(e); return (e.username !== host_player.username && e.username !== my_player.username); });
       console.log("OTHERS: ", other_players);
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players });
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players });
     }
   });
 });
