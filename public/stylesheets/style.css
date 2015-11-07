@@ -5,4 +5,38 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+h1 {
+  color: #00B7FF;
+  font-size: 42px;
+}
+
+.big_button {
+  background-color: rgba(100, 100, 100, 0);
+  -moz-border-radius:42px;
+  -webkit-border-radius:42px;
+  border-radius:42px;
+  display:inline-block;
+  cursor:pointer;
+  font-size:27px;
+  padding:32px 32px;
+  text-decoration:none;
+}
+
+.big_button:hover {
+  background-color: rgba(100, 100, 100, 0.03);
+}
+
+#nav {
+  text-align: right;
+  text-decoration: none;
 }
