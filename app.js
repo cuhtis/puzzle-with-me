@@ -9,6 +9,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+
+require('./models/session');
 
 var routes = require('./routes/index');
 var game = require('./routes/game');
@@ -26,6 +29,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var sessionOptions = { 
+  secret: 'secret for signing session id', 
+  saveUninitialized: false, 
+  resave: false 
+};
+app.use(session(sessionOptions));
 
 app.use('/', routes);
 app.use('/game', game);
@@ -63,4 +73,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-app.listen(3000);
+app.listen(4000);

@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+var mongoose = require('mongoose');
+var Session = mongoose.model('Session');
+
 /* GET home page. */
 router.get('/', function(req, res, next) { // change ready and unpaid
-  res.render('index', { title: 'Puzzle With Me', ready: true, unpaid: true});
+  var newSession = new Session({
+
+  });
+  newSession.save();
+
+  var copyURL = req.url + req.sessionID;
+  res.render('index', { title: 'Puzzle With Me', copyURL: copyURL, ready: true, unpaid: true});
 });
 
 router.get('/start', function(req, res, next) {
