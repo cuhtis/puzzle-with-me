@@ -11,5 +11,4 @@ var Session = new mongoose.Schema({
 
 mongoose.model('Session', Session);
 
-
-var mongoose.connect('mongodb://localhost/puzzledb');
+mongoose.connect('mongodb://localhost/puzzledb');
