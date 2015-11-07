@@ -1,3 +1,28 @@
+<script>
+$(document).ready(function() {
+  var socket = io();
+  socket.emit('logon', { name: "{{ me.username }}" });
+  
+  socket.on('newUser', function (data) {
+    console.log(data.name, "has logged on.");
+    $('#messages').append($('<li>').text(data.name + " has logged on."));
+  });
+  
+  $('form').submit(function(){
+    if($('#m').val() !== '') {
+      console.log("sent message");
+      socket.emit('chat message', "{{me.username}}: " + $('#m').val());
+      $('#m').val('');
+    }
+    return false;
+  });
+  
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
+});
+</script>
+
 <h1 class="title center">Puzzle With Me</h1>
 
 <h3>{{host.username}}'s Game</h3>
@@ -26,7 +51,10 @@
 <p class="text center">{{timer}}</p>
 
 <div class="riddle_box">
-	<h3>riddle</h3>
+  <ul id="messages"></ul>
+  <form action="" style="bottom:0px">
+    <input id="m" autocomplete="off" style="width:100%" />
+  </form>
 </div>
 
 {{#if isHost}}

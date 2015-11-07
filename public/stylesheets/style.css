@@ -50,6 +50,22 @@ body {
   background: #0099FF;
 }
 
+#messages {
+  list-style-type: none; margin: 0; padding: 0; 
+}
+
+#messages li {
+  padding: 5px 10px; 
+  margin: 0px;
+  color: black;
+  text-align: left;
+  font-size: 12px;
+}
+
+#messages li:nth-child(odd) { 
+  background: #eee; 
+}
+
 h1, h2 {
   color:#0099FF;
 }

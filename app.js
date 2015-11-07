@@ -17,6 +17,10 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
 
+// Vars
+var totalOnline = 0;
+
+
 // Mongoose
 require('./models/session');
 require('./models/player');
@@ -147,7 +151,6 @@ app.get('/game/join/:session_id', function(req, res, next) {
   Session.findOne({_id: req.params.session_id}, function(err, session, count) {
     if (err || session == undefined && req.session.username != undefined) res.redirect('/error?type=notfound');
     else {
-      var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
       // FIND INDEX OF REQ PLAYER MANUALLY
       var my_index = -1; var cnt = 0;
       session.players.forEach(function(player){
@@ -228,16 +231,24 @@ app.post('/game/join/:session_id', function(req, res, next){
 
 
 io.on('connection', function (socket) {
-  console.log('user connected');
-  io.emit('news', { hello: 'world' });
-
-  socket.on('my other event', function (data) {
-    console.log(data);
+  console.log('User connected, total online:', totalOnline);
+  totalOnline += 1;
+  
+  socket.on('logon', function (data) {
+    console.log(data.name, "has logged on.");
+    io.emit('newUser', { name: data.name });
   });
 
   socket.on('disconnect', function () {
-    io.emit('user disconnected');
+    console.log('user disconnected, total online:', totalOnline);
+    totalOnline -= 1;
   });
+  
+  socket.on('chat message', function(msg){
+    console.log(msg);
+    io.emit('chat message', msg);
+  });
+
 });
 
 

@@ -1,12 +1,3 @@
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-</script>
-
 <h1 class="title">{{title}}</h1>
 
 {{#if hasError}}
