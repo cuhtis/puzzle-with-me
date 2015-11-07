@@ -1,0 +1,36 @@
+/
+	-Host page
+		-button "Place bet with Venmo"
+			-> button "play"
+			-> button "change bet"
+		-URL copy field
+		-rules -> /rules
+/start
+	-page received from URL paste
+		-button "Place bet with Venmo"
+			-> button "play"
+			-> button "change bet"
+		-rules -> /rules
+/rules
+	-rules page
+		-button "return to start"
+/wait
+	-Wait page for 4 players to connect
+		-Window divided into 4
+		-Icon/image for each player
+		-Host
+			-button "start" greyed out until all players connecting/connected have hit "ready" button
+		-Player
+			-button "ready"
+/play
+	-game page
+		-puzzle screen in user's corresponding box
+		-button "Answer"
+		-check mark for players that submitted
+		-countdown when 1 minute left
+		-players that forfeit/disconnect when >1 min left lose their bet otherwise lose half their bet
+/result
+	-displays winner
+		-Winner/Loser labels for each player
+		-winner receives money through Venmo
+		-chat room to talk shit
