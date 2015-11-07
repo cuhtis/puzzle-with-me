@@ -1,0 +1,19 @@
+<h1 class="title center">Puzzle With Me</h1>
+<p class="text center">{{timer}}</p>
+
+<!--BOXES-->
+
+<!--user image-->
+{{name}}
+
+{{if gameOwner}}
+	{{if allReady}}
+		<a href="/game" class="big_button">START</a>
+	{{/if}}
+	{{else}}
+		<!-- start button greyed out-->
+	{{/else}}
+{{/if}}
+{{else}}
+	<a href="/game" class="big_button">READY</a>
+{{/else}}
