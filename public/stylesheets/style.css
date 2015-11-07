@@ -30,6 +30,8 @@ Description: Shopify Theme (http://www.shopify.com/?ref=out-of-the-sandbox)
   
 body {
   background: gray;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  color: blue;
 }
 /* ADVICE */
 .Advice{
@@ -95,7 +97,7 @@ table {
   
     
 /* #Basic Styles
-================================================== */
+================================================== 
   body { 
     background-color: {{ settings.sub_footer_color }};
     {% if settings.use_custom_bg_image %}
@@ -125,7 +127,7 @@ table {
     text-transform: {{ settings.regular_font_style }};
     color: {{ settings.regular_color }};
     line-height: 1.8em;
-}
+}*/
 #content_wrapper {
   background-color: {{ settings.shop_bg_color }};
 }
