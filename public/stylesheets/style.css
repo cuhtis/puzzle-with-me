@@ -1,27 +1,23 @@
 body, html {
 height:100%;
 font-family: Helvetica;
-color: white;
+color: #fafafa;
 }
 body
 {
-width:50%;
-margin-left:auto;
-margin-right:auto;
+
 }
 .container {
-margin-right: auto;
-margin-left: auto;
+
 }
 .content {
-padding: 10px 0px 10px 0px;
-background-color: black;
+background-color: #fafafa;
 }
 h1, h2{
-color:#51a154;
+color:#CCFFFF;
 }
 h1{
-font-size: 70px;
+font-size: 50px;
 margin: auto;
 width: 100%;
 }
@@ -30,14 +26,14 @@ h2{
 font-size: 30px;
 }
 p{
-color: white;
+color: gray;
 	}
 a {
-color: #5b89b7;
+color: #CCFFFF;
 }
 
 a:visited {
-color: #5b89b7;
+color: #CCFFFF;
 }
 
 ul, li{
@@ -55,10 +51,10 @@ border-radius: 5px;
 border: 0;
 font-family: Tahoma;
 font-size: 20px;
-background: #51a154;
+background: #CCFFFF;
 }
 input[type=text] {
     width: 60%;
     line-height: 100%;
-    font-size: 50px;
+    font-size: 20px;
 }
