@@ -10,8 +10,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var mongoose = require('mongoose');
 
 require('./models/session');
+require('./models/player');
+mongoose.connect('mongodb://curtis:curtis@ds051334.mongolab.com:51334/heroku_7mb729v5/puzzledb');
 
 var routes = require('./routes/index');
 var game = require('./routes/game');

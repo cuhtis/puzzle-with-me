@@ -42,7 +42,7 @@ router.get('/start', function(req, res, next) {
 
 router.get('/wait/:game_id', function(req, res, next) {
   res.render('wait', {game_id: game_id});
-
+});
 
 router.get('/rules', function(req, res, next) {
   res.render('rules');
@@ -55,7 +55,7 @@ router.get('/play/:game_id', function(req, res, next) {
 
 router.get('/game/join/:game_id', function(req, res, next) {
   res.redirect('/wait/:game_id');
-
+});
 
 
 router.get('/result', function(req, res, next) {
