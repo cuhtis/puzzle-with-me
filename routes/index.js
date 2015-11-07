@@ -15,7 +15,7 @@ router.get('/wait', function(req, res, next) {
 });
 
 router.get('/rules', function(req, res, next) {
-  res.render('/rules');
+  res.render('rules');
 });
 
 router.get('/play', function(req, res, next) {
@@ -25,9 +25,9 @@ router.get('/play', function(req, res, next) {
 router.get('/result', function(req, res, next) {
   // PSUEDOCODE
   // if (req.session.winner === req.session.id) {
-  //   res.render('/winner', {pot: game.pot});
+  //   res.render('winner', {pot: game.pot});
   // } else {
-  //   res.render('/loser', {winner: game.winner, bet: req.session.bet});
+  //   res.render('loser', {winner: game.winner, bet: req.session.bet});
   // }
   res.redirect('/');
 });
