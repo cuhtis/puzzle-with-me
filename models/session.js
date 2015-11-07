@@ -6,7 +6,8 @@ var Session = new mongoose.Schema({
   num_players: Number,
   players: Array,
   games: Array,
-  bet_pot: Number
+  bet_pot: Number,
+  active: Boolean
 });
 
 mongoose.model('Session', Session);

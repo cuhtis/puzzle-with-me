@@ -1,81 +1,90 @@
 body, html {
-height:100%;
-font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-color: #fafafa;
+  height:100%;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #fafafa;
 }
-body
-{
 
+body {
+  padding: 10px;
 }
+
 .container {
 
 }
+
 .content {
-background-color: #fafafa;
-}
-h1, h2{
-color:#0099FF;
-}
-h1{
-font-size: 50px;
-margin: auto;
-width: 100%;
+  padding:10px;
+  background-color: #fafafa;
 }
 
-h2{
-font-size: 30px;
+h1, h2 {
+  color:#0099FF;
 }
-p{
-color: black;
-	}
+
+h1 {
+  font-size: 50px;
+  margin: auto;
+  width: 100%;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+p {
+  color: black;
+}
+
 a {
-color: #0099FF;
+  color: #0099FF;
 }
 
 a:visited {
-color: #0099FF;
+  color: #0099FF;
 }
 
-ul, li{
-color: black;
-font-size: 30px;
+ul, li {
+  color: black;
+  font-size: 30px;
 }
 
-ul{
-padding-left: 60px;
+ul {
+  padding-left: 60px;
 }
-input{
+
+input {
 	color:black;
 }
 
 input[type=submit] {
-padding: 30px 50px;
-border-radius: 5px;
-border: 0;
-font-family: Tahoma;
-font-size: 20px;
-background: #0099FF;
-}
-input[type=text],  [type=number]{
-    width: 30%;
-    line-height: 100%;
-    font-size: 20px;
+  padding: 30px 50px;
+  border-radius: 5px;
+  border: 0;
+  font-family: Tahoma;
+  font-size: 20px;
+  background: #0099FF;
 }
 
-hr{
-    height: 2px;
-    background-color:#ffffff;
-    color:#ffffff;
-  	border: 0 none;
-    background-image: linear-gradient(to left, rgba(0, 153, 255, 0), rgba(0, 153, 255, 1), rgba(0, 153, 255, 0));
+input[type=text],[type=number] {
+  width: 30%;
+  line-height: 100%;
+  font-size: 20px;
+}
+
+hr {
+  height: 2px;
+  background-color:#ffffff;
+  color:#ffffff;
+	border: 0 none;
+  background-image: linear-gradient(to left, rgba(0, 153, 255, 0), rgba(0, 153, 255, 1), rgba(0, 153, 255, 0));
 
 }
 
-hr.threeFifths{
+hr.threeFifths {
   width: 60%;
 }
 
-hr.sub_border{
+hr.sub_border {
   height: 2px;
   width: 20%;
   border: 0 none;

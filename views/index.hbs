@@ -5,9 +5,18 @@
 
 <br><br>
 
-<form method="POST" action="/game/create_game">
+{{#if isHost}}
+<form method="POST" action="/game/create">
   <input type="text" name="username" placeholder="Name"><br>
   <input type="number"  min="0" name="bet" placeholder="Bet"><br><br>
 
   <input type="submit" width="48" height="48" name ="add" value="Host Game">
 </form>
+{{else}}
+<form method="POST" action="/game/join">
+  <input type="text" name="username" placeholder="Name"><br>
+  <input type="number" min="0" name="bet" placeholder="Bet"><br><br>
+  <input type="hidden" name="session" value={{session}}>
+  <input type="submit" width="48" height="48" name ="add" value="Join Game">
+</form>
+{{/if}}

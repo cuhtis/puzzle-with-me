@@ -1,9 +1,0 @@
-
-******* DO THIS FIRST ********
-chmod 600 yhack.pem
-
-******* RUN THIS LINE ********
-ssh -i yhack.pem ec2-user@ec2-54-152-38-29.compute-1.amazonaws.com
-
-
-54.152.38.29
