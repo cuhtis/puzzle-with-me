@@ -1,8 +1,81 @@
 <h2 class="title center">WAITING</h2>
 
-{{if user_session_id == this}}
-	<a href="/" class="button center">Ready</a>
+<div class="upper-right">
+{{#if user_session_id == this}}
+  {{#if user_session_id == game_session.owner_id}}
+    {{#if game_session.allReady}}
+      <a href="/play" class="big_button">START</a>
+    {{else}}
+      <button type="button" disabled class="disabled">START</button>
+    {{/if}}
+  {{else}}
+    {{#if !user_session_id.ready}}
+      <form method="PUT">
+        <input type="submit" value="true">READY
+      </form>
+    {{else}}
+      <p>Waiting for game owner to start...</p>
+    {{/if}}
+  {{/if}}
 {{/if}}
-{{else}} 
-	<p class="text center">Waiting for {{name}}...</p>
-{{/else}}
+</div>
+
+<div class="upper-left">
+{{#if user_session_id == this}}
+  {{#if user_session_id == game_session.owner_id}}
+    {{#if game_session.allReady}}
+      <a href="/play" class="big_button">START</a>
+    {{else}}
+      <button type="button" disabled class="disabled">START</button>
+    {{/if}}
+  {{else}}
+    {{#if !user_session_id.ready}}
+      <form method="PUT">
+        <input type="submit" value="true">READY
+      </form>
+    {{else}}
+      <p>Waiting for game owner to start...</p>
+    {{/if}}
+  {{/if}}
+{{/if}}
+</div>
+
+<div class="bottom-right">
+{{#if user_session_id == this}}
+  {{#if user_session_id == game_session.owner_id}}
+    {{#if game_session.allReady}}
+      <a href="/play" class="big_button">START</a>
+    {{else}}
+      <button type="button" disabled class="disabled">START</button>
+    {{/if}}
+  {{else}}
+    {{#if !user_session_id.ready}}
+      <form method="PUT">
+        <input type="submit" value="true">READY
+      </form>
+    {{else}}
+      <p>Waiting for game owner to start...</p>
+    {{/if}}
+  {{/if}}
+{{/if}}
+</div>
+
+<div class="bottom-left">
+{{#if user_session_id == this}}
+  {{#if user_session_id == game_session.owner_id}}
+    {{#if game_session.allReady}}
+      <a href="/play" class="big_button">START</a>
+    {{else}}
+      <button type="button" disabled class="disabled">START</button>
+    {{/if}}
+  {{else}}
+    {{#if !user_session_id.ready}}
+      <form method="PUT">
+        <input type="submit" value="true">READY
+      </form>
+    {{else}}
+      <p>Waiting for game owner to start...</p>
+    {{/if}}
+  {{/if}}
+{{/if}}
+</div>
