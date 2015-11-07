@@ -1,3 +1,8 @@
+// YHACKS 2015
+// Michelle Chen, Kristin Ho, Curtis Li, Noah Cheng, Carter Yu
+//
+// APP.JS
+//
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
