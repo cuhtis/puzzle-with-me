@@ -1,0 +1,20 @@
+{{#if isHost}}
+  <!-- Target -->
+  <input id="copyURLText" value={{copyURL}}>
+
+  <!-- Trigger -->
+  <button class="btn" data-clipboard-target="#copyURLText">
+    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="13" alt="Copy to clipboard">
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
+  <script>
+    var clipboard = new Clipboard('.btn'); 
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+{{/if}}

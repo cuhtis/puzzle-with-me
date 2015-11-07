@@ -6,13 +6,21 @@ var Session = mongoose.model('Session');
 
 /* GET home page. */
 router.get('/', function(req, res, next) { // change ready and unpaid
-  var newSession = new Session({
+  var copyURL = req.protocol + '://' + req.get('host') + req.originalUrl + "join_game?game_id=" + req.sessionID;
+  res.render('index', { title: 'Puzzle With Me', copyURL: copyURL, ready: true, unpaid: true});
+});
 
+router.post('/create_game', function(req, res, next) {
+  var newSession = new Session({
+    session_id: req.body.session_id,
+    host: req.body.username,
+    num_players: 1,
+    games: [],
+    bet_pot: req.body.bet
   });
   newSession.save();
 
-  var copyURL = req.url + req.sessionID;
-  res.render('index', { title: 'Puzzle With Me', copyURL: copyURL, ready: true, unpaid: true});
+  res.redirect('/game/host/'+req.body.session_id);
 });
 
 router.get('/start', function(req, res, next) {
