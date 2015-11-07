@@ -1,0 +1,4 @@
+Q:  If you have 25 horses, a race track with five lanes, and no timer, how many races would it take to determine which three horses are the fastest?
+A:  7
+
+Q:  
