@@ -1,81 +1,109 @@
 <h2 class="title center">WAITING</h2>
 
 <div class="upper-right">
-{{#if user_session_id == this}}
-  {{#if user_session_id == game_session.owner_id}}
-    {{#if game_session.allReady}}
-      <a href="/play" class="big_button">START</a>
+  <h4>{{name}}</h4>
+  {{#if user_session_id == this}}
+    {{#if user_session_id == game_session.owner_id}}
+      {{#if game_session.allReady}}
+        <a href="/play" class="big_button">START</a>
+      {{else}}
+        <button type="button" disabled class="disabled">START</button>
+      {{/if}}
     {{else}}
-      <button type="button" disabled class="disabled">START</button>
+      {{#if !user_session_id.ready}}
+        <form method="PUT">
+          <input type="submit" value="true">READY
+        </form>
+      {{else}}
+        <p>Waiting for game owner to start...</p>
+      {{/if}}
     {{/if}}
   {{else}}
-    {{#if !user_session_id.ready}}
-      <form method="PUT">
-        <input type="submit" value="true">READY
-      </form>
+    {{#if user_session_id.ready}}
+      <p>Ready to Go...</p>
     {{else}}
-      <p>Waiting for game owner to start...</p>
+      <p>Not Ready!</p>
     {{/if}}
   {{/if}}
-{{/if}}
 </div>
 
 <div class="upper-left">
-{{#if user_session_id == this}}
-  {{#if user_session_id == game_session.owner_id}}
-    {{#if game_session.allReady}}
-      <a href="/play" class="big_button">START</a>
+  <h4>{{name}}</h4>
+  {{#if user_session_id == this}}
+    {{#if user_session_id == game_session.owner_id}}
+      {{#if game_session.allReady}}
+        <a href="/play" class="big_button">START</a>
+      {{else}}
+        <button type="button" disabled class="disabled">START</button>
+      {{/if}}
     {{else}}
-      <button type="button" disabled class="disabled">START</button>
+      {{#if !user_session_id.ready}}
+        <form method="PUT">
+          <input type="submit" value="true">READY
+        </form>
+      {{else}}
+        <p>Waiting for game owner to start...</p>
+      {{/if}}
     {{/if}}
   {{else}}
-    {{#if !user_session_id.ready}}
-      <form method="PUT">
-        <input type="submit" value="true">READY
-      </form>
+    {{#if user_session_id.ready}}
+      <p>Ready to Go...</p>
     {{else}}
-      <p>Waiting for game owner to start...</p>
+      <p>Not Ready!</p>
     {{/if}}
   {{/if}}
-{{/if}}
 </div>
 
 <div class="bottom-right">
-{{#if user_session_id == this}}
-  {{#if user_session_id == game_session.owner_id}}
-    {{#if game_session.allReady}}
-      <a href="/play" class="big_button">START</a>
+  <h4>{{name}}</h4>
+  {{#if user_session_id == this}}
+    {{#if user_session_id == game_session.owner_id}}
+      {{#if game_session.allReady}}
+        <a href="/play" class="big_button">START</a>
+      {{else}}
+        <button type="button" disabled class="disabled">START</button>
+      {{/if}}
     {{else}}
-      <button type="button" disabled class="disabled">START</button>
+      {{#if !user_session_id.ready}}
+        <form method="PUT">
+          <input type="submit" value="true">READY
+        </form>
+      {{else}}
+        <p>Waiting for game owner to start...</p>
+      {{/if}}
     {{/if}}
   {{else}}
-    {{#if !user_session_id.ready}}
-      <form method="PUT">
-        <input type="submit" value="true">READY
-      </form>
+    {{#if user_session_id.ready}}
+      <p>Ready to Go...</p>
     {{else}}
-      <p>Waiting for game owner to start...</p>
+      <p>Not Ready!</p>
     {{/if}}
   {{/if}}
-{{/if}}
 </div>
 
 <div class="bottom-left">
-{{#if user_session_id == this}}
-  {{#if user_session_id == game_session.owner_id}}
-    {{#if game_session.allReady}}
-      <a href="/play" class="big_button">START</a>
+  <h4>{{name}}</h4>
+  {{#if user_session_id == this}}
+    {{#if user_session_id == game_session.owner_id}}
+      {{#if game_session.allReady}}
+        <a href="/play" class="big_button">START</a>
+      {{else}}
+        <button type="button" disabled class="disabled">START</button>
+      {{/if}}
     {{else}}
-      <button type="button" disabled class="disabled">START</button>
+      {{#if !user_session_id.ready}}
+        <form method="PUT">
+          <input type="submit" value="true">READY
+        </form>
+      {{else}}
+        <p>Waiting for game owner to start...</p>
+      {{/if}}
     {{/if}}
   {{else}}
-    {{#if !user_session_id.ready}}
-      <form method="PUT">
-        <input type="submit" value="true">READY
-      </form>
+    {{#if user_session_id.ready}}
+      <p>Ready to Go...</p>
     {{else}}
-      <p>Waiting for game owner to start...</p>
+      <p>Not Ready!</p>
     {{/if}}
   {{/if}}
-{{/if}}
 </div>
