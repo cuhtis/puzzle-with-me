@@ -81,6 +81,7 @@ router.get('/join/:session_id', function(req, res, next) {
     console.log("RESULTS: ", session);
     if (err || session == undefined) res.redirect('/error?type=notfound');
     else {
+
       var copyURL = req.protocol + "://" + req.get('host') + "/game/invite/" + req.params.session_id;
       //console.log(session, req.sessionID);
       console.log("SESSION: ", req.session);
@@ -102,7 +103,15 @@ router.get('/join/:session_id', function(req, res, next) {
       console.log(session.players);
       var other_players = session.players.filter(function(e) { console.log(e); return e.username !== host_player.username && e.username !== my_player.username; });
       console.log("OTHERS: ", other_players);
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players });
+
+       var hasUserName = [false,false,false,false];
+      if(session){
+        for (numPlayers = 0; numPlayers <= session.num_players-1; numPlayers++){
+          hasUserName[numPlayers]=true;
+        }
+      }
+
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, players: other_players, hasUserName: hasUserName });
     }
   });
 });
