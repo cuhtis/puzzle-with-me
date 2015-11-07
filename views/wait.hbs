@@ -32,20 +32,26 @@
 {{#if isHost}}
 <div class="player_box" id="my_box">
   <h3>{{host.username}} (HOST)</h3>
+  <a href="/" class="btn btn-default btn-lg">Start</a>
 </div>
 {{else}}
 <div class="player_box">
   <h3>{{host.username}} (HOST)</h3>
+  	<!--disabled button-->
+    <a href="/" class="btn btn-default btn-lg disabled">Start</a>
 </div>
 
 <div class="player_box" id="my_box">
   <h3>{{me.username}} (ME)</h3>
+   <a href="/" class="btn btn-default btn-lg">Ready</a>
 </div>
 {{/if}}
 
 {{#each others}}
 <div class="player_box">
- <h3>{{this.username}}</h3> 
+ <h3>{{this.username}}</h3>
+ <!--disabled button-->
+  <a href="/" class="btn btn-default disabled btn-lg">Ready</a> 
 </div>
 {{/each}}
 
