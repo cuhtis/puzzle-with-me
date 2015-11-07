@@ -11,4 +11,4 @@ var Session = new mongoose.Schema({
 
 mongoose.model('Session', Session);
 
-mongoose.connect('mongodb://localhost/puzzledb');
+mongoose.connect('mongodb://curtis:curtis@ds051334.mongolab.com:51334/heroku_7mb729v5/puzzledb');
