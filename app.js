@@ -4,6 +4,7 @@
 // APP.JS
 //
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -18,8 +19,6 @@ mongoose.connect('mongodb://curtis:curtis@ds051334.mongolab.com:51334/heroku_7mb
 
 var routes = require('./routes/index');
 var game = require('./routes/game');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
