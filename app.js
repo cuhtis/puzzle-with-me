@@ -303,7 +303,7 @@ io.on('connection', function (socket) {
   
   socket.on('logon', function (data) {
     console.log(data.name, "has logged on.");
-    io.emit('newUser', { name: data.name });
+    io.emit('newUser', { name: data.name, isReady: data.ready });
   });
 
   socket.on('disconnect', function () {

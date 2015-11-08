@@ -1,13 +1,25 @@
 <script>
 $(document).ready(function() {
   var socket = io();
-  socket.emit('logon', { name: "{{ me.username }}" });
+  socket.emit('logon', { name: "{{ me.username }}", isReady: "{{ me.isReady }}" });
   
   socket.on('newUser', function (data) {
     console.log(data.name, "has logged on.");
     $('#messages').append($('<li>').text(data.name + " has logged on."));
     $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
-    
+    if (data.name !== '{{ me.username }}') {
+      var text_str = "Not ready!";
+      if (data.isReady) text_str = "Ready to Go...";
+      var boxes = $('#player_boxes').children();
+      for (var i = 0; i < 4; i++) {
+        if (boxes[i].getElementsByTagName('h3')[0].innerText === "No player") {
+          boxes[i].getElementsByTagName('h3')[0].innerText = data.name;
+          boxes[i].className = "player_box five columns alpha omega";
+          boxes[i].getElementsByTagName('p')[0].innerText = text_str;
+          break;
+        }
+      }
+    } 
   });
   
   $('#message_form').submit(function(){
@@ -53,7 +65,7 @@ $(document).ready(function() {
 </div>
 
 <!-- section for the boxes-->
-<div class="ten columns">
+<div id="player_boxes" class="ten columns">
 
 {{#if isHost}}
 <div class="player_box five columns alpha omega" id="my_box">
@@ -94,9 +106,11 @@ $(document).ready(function() {
 {{else}}
 <div class="empty_player_box five columns alpha omega">
 	<h3>No player</h3>
+  <p></p>
 </div>
 {{/if}}
 {{/each}}
+
 </div>
 
 <!-- END BOXES-->
