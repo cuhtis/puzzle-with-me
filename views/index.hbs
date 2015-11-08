@@ -15,13 +15,13 @@
   <input type="text" name="username" placeholder="Name"><br>
   <input type="number"  min="0" name="bet" placeholder="Bet"><br><br>
 
-  <input type="submit" width="48" height="48" name ="add" value="Host Game">
+  <input type="submit" class="btn btn-default btn-lg" width="48" height="48" name ="add" value="Host Game">
 </form>
 {{else}}
 <form method="POST" action="/game/join">
   <input type="text" name="username" placeholder="Name"><br>
   <input type="number" min="0" name="bet" placeholder="Bet"><br><br>
   <input type="hidden" name="session" value={{session}}>
-  <input type="submit" width="48" height="48" name ="add" value="Join Game">
+  <input type="submit" name ="add" value="Join Game">
 </form>
 {{/if}}
