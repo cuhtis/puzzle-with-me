@@ -8,17 +8,12 @@ body {
   padding: 10px;
 }
 
-.container {
-
-}
-
 .content {
-  padding:10px;
+  padding:30px;
   background-color: #fafafa;
 }
 
 .player_box {
-  float: right;
   width: 29%;
   height:250px;
   margin:2px;
@@ -26,7 +21,6 @@ body {
 }
 
 .riddle_box {
-  float: left;
   width: 40%;
   height:504px;
   margin:2px;
@@ -34,7 +28,6 @@ body {
 }
 
 .empty_player_box {
-  float: right;
   width: 29%;
   height:250px;
   margin:2px;

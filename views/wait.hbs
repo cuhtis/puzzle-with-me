@@ -49,13 +49,13 @@ $(document).ready(function() {
 </div>
 
 {{else}}
-<div class="player_box two columns">
+<div class="player_box five columns alpha omega">
   <h3>{{host.username}} (HOST)</h3>
   	<!--disabled button-->
     <a href="/" class="btn btn-default btn-lg disabled">Start</a>
 </div>
 
-<div class="player_box two columns" id="my_box">
+<div class="player_box five columns alpha omega" id="my_box">
   <h3>{{me.username}} (ME)</h3>
   {{#if me.isReady}}
   	<p>Waiting for game owner to start...</p>
@@ -68,7 +68,7 @@ $(document).ready(function() {
 {{/if}}
 
 {{#each others}}
-<div class="player_box two columns">
+<div class="player_box five columns alpha omega">
  <h3>{{this.username}}</h3>
  {{#if this.isReady}}
   	<p>Ready to Go...</p>
@@ -88,7 +88,7 @@ $(document).ready(function() {
 {{/each}}
 </div>
 <!-- END BOXES-->
-
+<div class = "fifteen columns">
 {{#if isHost}}
   <!-- Target -->
   <input id="copyURLText" value={{copyURL}}>
@@ -110,3 +110,5 @@ $(document).ready(function() {
   </script>
 {{/if}}
 <a  href="/quit" class="btn btn-default"><img src="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-512.png" height="20"></a>
+
+</div>
