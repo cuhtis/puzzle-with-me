@@ -1,37 +1,21 @@
 <h1 class="title center">Puzzle With Me</h1>
 
-{{#if isHost}}
-  <!-- Target -->
-  <input id="copyURLText" value={{copyURL}}>
-
-  <!-- Trigger -->
- <button class="btn" data-clipboard-target="#copyURLText">
-    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="13" alt="Copy to clipboard">
-  </button>
-
-  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
-  <script>
-    var clipboard = new Clipboard('.btn'); 
-    clipboard.on('success', function(e) {
-      console.log(e);
-    });
-    clipboard.on('error', function(e) {
-      console.log(e);
-    });
-  </script>
-{{/if}}
-
 <p class="text center">{{timer}}</p>
 
 <div class="riddle_box">
-	<h3>riddle</h3>
+	<h3>puzzle</h3>
+  <p>{{question}}</p>
 </div>
 
 <div class="player_box" id="my_box">
   <h3>{{me.username}}</h3>
+  <form method="POST">
+    <input type="text" name="answer">
+    <input type="submit">
+  </form>
 </div>
 
-{{#each players}}
+{{#each others}}
 <div class="player_box">
 	<h3>{{this.username}}</h3>
 </div>
