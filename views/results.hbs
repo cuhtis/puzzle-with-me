@@ -1,0 +1,106 @@
+<script>
+$(document).ready(function() {
+  var socket = io();
+  socket.emit('logon', { name: "{{ me.username }}" });
+  
+  socket.on('newUser', function (data) {
+    console.log(data.name, "has logged on.");
+    $('#messages').append($('<li>').text(data.name + " has logged on."));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+  });
+  
+  $('#message_form').submit(function(){
+    if($('#m').val() !== '') {
+      console.log("sent message");
+      socket.emit('chat message', "{{me.username}}: " + $('#m').val());
+      $('#m').val('');
+    }
+    return false;
+  });
+  
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+  });
+
+  socket.on('notification_ready', function(username, is_ready){
+    $('#messages').append($('<li>').text(username + " is ready."));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+  });
+
+  $('#ready_form').submit(function(){
+    io.emit('notification_ready', {session: {{session}}, username:'{{me.username}}' });
+    return false;
+  });
+
+});
+</script>
+
+<h1 class="title center">Puzzle With Me</h1>
+
+<h3>Results</h3>
+
+<div class="left_box five columns">
+  <div id="message_box"><ul id="messages"></ul></div>
+  <form id="message_form" style="bottom:0px">
+    <input id="m" autocomplete="off" style="width:99%" />
+  </form>
+</div>
+
+<!-- section for the boxes-->
+<div class="ten columns">
+
+{{#if isWinner}}
+<div class="player_box five columns alpha omega" id="my_box">
+  <h3>WINNER: {{winner.username}}</h3>
+  <p class="text center">Congratulations, you have won ${{session.pot}}!</p>
+</div>
+
+{{else}}
+<div class="player_box five columns alpha omega" id="my_box">
+  <h3>LOSER: {{me.username}} (ME)</h3>
+  <p class="text center">You lost {{me.betAtm}}. Better luck next time!</p>
+</div>
+{{/if}}
+
+{{#each others}}
+<div class="player_box five columns alpha omega">
+ <h3>LOSER: {{this.username}}</h3>
+ <p class="text center">{{this.username}} lost {{this.betAtm}}. Better luck next time!</p>
+</div>
+{{/each}}
+
+{{#each hasUserName}}
+{{#if this}}
+{{else}}
+<div class="empty_player_box five columns alpha omega">
+	<h3>No player</h3>
+</div>
+{{/if}}
+{{/each}}
+</div>
+<!-- END BOXES-->
+<div class = "fifteen columns">
+{{#if isHost}}
+  <!-- Target -->
+  <input id="copyURLText" value={{copyURL}}>
+
+  <!-- Trigger -->
+ <button class="btn btn-default" data-clipboard-target="#copyURLText">
+    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="20" alt="Copy to clipboard">
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
+  <script>
+    var clipboard = new Clipboard('.btn'); 
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+{{/if}}
+<a  href="/quit" class="btn btn-default"><img src="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-512.png" height="20"></a>
+
+</div>

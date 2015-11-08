@@ -255,8 +255,44 @@ app.get('/game/play/:session_id', function(req, res) {
   });
 });
 
+
+// FIX TO MESH WITH SOCKET.IO
 app.post('/game/play/:session_id', function(req, res) {
   console.log("Receiving answer from user ", req.session.username, "...");
+  Session.findOne({_id: req.params.session_id}, function(err, session) {
+    if (err || session == undefined || !req.session.username || !req.body.answer) res.redirect('/error?type=notfound');
+    else {
+      // current database set allows comparison to a single answer or multiple answers in an array. take your pick.
+      if (answer === req.body.answer && !session.winner) {   // unless there is already a winner stated, set it. that will perserve order of who submitted first.
+        session.winner = req.session.username;
+      }
+    }
+  });
+});
+
+app.get('/game/results/:session_id', function(req, res) {
+  Session.findOne({_id: req.params.session_id}, function(err, session) {
+    if (err || !session || !req.session.username || !req.body.answer) res.redirect('/error?type=notfound');
+    else {
+      // FIND INDEX OF REQ PLAYER MANUALLY
+      var my_index = -1; var cnt = 0;
+      session.players.forEach(function(player){
+        if (player.username === req.session.username) { my_index = cnt; }
+        cnt++;
+      });
+      var my_player = session.players[my_index];
+      var other_players = session.players.filter(function(e) { console.log(e); return e.username != my_player.username; });
+
+      var hasUserName = [false,false,false,false];
+      if(session){
+        for (numPlayers = 0; numPlayers <= session.num_players-1; numPlayers++){
+          hasUserName[numPlayers]=true;
+        }
+      }
+      // PLS RENDER CHAT TOO
+      res.render('results', {session: session, winner: session.winner, me: my_player, others: other_players, hasUserName: hasUserName});
+    }
+  });
 });
 
 
