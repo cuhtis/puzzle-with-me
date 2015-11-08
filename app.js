@@ -174,7 +174,7 @@ app.get('/game/join/:session_id', function(req, res, next) {
         }
       }
 
-      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players, hasUserName: hasUserName, session: session });
+      res.render('wait', { title: 'Puzzle With Me', isHost: false, host: host_player, me: my_player, others: other_players, hasUserName: hasUserName, session_id: req.params.session_id });
     }
   });
 });
@@ -205,7 +205,7 @@ app.get('/game/host/:session_id', function(req, res, next) {
         }
       }
 
-      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players, hasUserName: hasUserName, session: session});
+      res.render('wait', { title: 'Puzzle With Me', copyURL: copyURL, isHost: true, me: my_player, host: host_player, others: other_players, hasUserName: hasUserName, session_id: req.params.session_id});
     }
   });
 });
@@ -252,6 +252,17 @@ io.on('connection', function (socket) {
   socket.on('chat message', function(msg){
     console.log(msg);
     io.emit('chat message', msg);
+  });
+
+  socket.on('notification_ready', function (session_id, username){
+    Session.findOne({_id: session_id}, function(err, session){
+      for (var num_players = 0; num_players < session.num_players; num_players++){
+        if(session.players.username === username){
+          session.player.isReady = true;
+        }
+      }
+    });
+    io.emit('notification_ready', username, true);
   });
 
 });

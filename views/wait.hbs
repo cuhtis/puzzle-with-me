@@ -6,10 +6,10 @@ $(document).ready(function() {
   socket.on('newUser', function (data) {
     console.log(data.name, "has logged on.");
     $('#messages').append($('<li>').text(data.name + " has logged on."));
-    $('#message_box').scrollTop = elem.scrollHeight;
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
   
-  $('form').submit(function(){
+  $('#message_form').submit(function(){
     if($('#m').val() !== '') {
       console.log("sent message");
       socket.emit('chat message', "{{me.username}}: " + $('#m').val());
@@ -22,6 +22,17 @@ $(document).ready(function() {
     $('#messages').append($('<li>').text(msg));
     $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
+
+  socket.on('notification_ready', function(username, is_ready){
+    $('#messages').append($('<li>').text(username + " is ready."));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+  });
+
+  $('#ready_form').submit(function(){
+    io.emit('notification_ready', {session: {{session}}, username:'{{me.username}}' });
+    return false;
+  });
+
 });
 </script>
 
@@ -58,7 +69,7 @@ $(document).ready(function() {
 
 <div class="left_box">
   <div id="message_box"><ul id="messages"></ul></div>
-  <form action="" style="bottom:0px">
+  <form id="message_form" style="bottom:0px">
     <input id="m" autocomplete="off" style="width:99%" />
 >>>>>>> 08059564951d3c2447f075e3440ed08ea769f126
   </form>
@@ -87,13 +98,9 @@ $(document).ready(function() {
 
 <div class="player_box five columns alpha omega" id="my_box">
   <h3>{{me.username}} (ME)</h3>
-  {{#if me.isReady}}
-  	<p>Waiting for game owner to start...</p>
-  {{else}}
-  	<form method="POST">
-    	<input type="submit" name="ready" value="Ready" class="btn btn-default btn-lg">
-  	</form>
-  {{/if}}
+  <form id="ready_form">
+    <button class="btn btn-default btn-lg">Ready</button>
+  </form>
 </div>
 {{/if}}
 
