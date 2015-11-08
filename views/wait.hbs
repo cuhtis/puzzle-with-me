@@ -38,8 +38,26 @@ $(document).ready(function() {
 
   socket.on('notification_ready', function(data){
     console.log("Done");
-    $('#messages').append($('<li>').text(data.username + " is ready."));
-    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+    {{#if isHost}}
+    {{else}}
+      $('#messages').append($('<li>').text(data.username + " is ready."));
+      $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+    {{/if}}
+  });
+
+  socket.on('notification_ready', function(){
+    console.log("all ready");
+    {{#if isHost}}
+      var startButton = document.getElementById("start_button");
+      startButton.className = startButton.className.replace("disabled","");
+      console.log(startButton.className);
+      startButton.disabled = false;
+    {{/if}}
+  });
+
+  $('#start_form').submit(function(){
+    socket.emit('notification_ready', {session_id: '{{session_id}}', username:'{{me.username}}' });
+    return false;
   });
 
   $('#ready_form').submit(function(){
@@ -70,15 +88,15 @@ $(document).ready(function() {
 {{#if isHost}}
 <div class="player_box five columns alpha " id="my_box">
   <h3>{{host.username}} (HOST)</h3>
-  <button id="start" class="btn btn-default disabled btn-lg">Start</button>
+  <form id="start_form">
+    <button id="start_button" class="btn btn-default disabled btn-lg">Start</button>
+  </form>
 </div>
 
 {{else}}
 
 <div class="player_box five columns alpha ">
   <h3>{{host.username}} (HOST)</h3>
-  	<!--disabled button-->
-    <a href="/" class="btn btn-default btn-lg disabled">Start</a>
 </div>
 
 <div class="player_box five columns alpha " id="my_box">
