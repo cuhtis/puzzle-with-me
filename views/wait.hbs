@@ -68,20 +68,20 @@ $(document).ready(function() {
 <div id="player_boxes" class="ten columns">
 
 {{#if isHost}}
-<div class="player_box five columns alpha omega" id="my_box">
+<div class="player_box five columns alpha " id="my_box">
   <h3>{{host.username}} (HOST)</h3>
   <button id="start" class="btn btn-default disabled btn-lg">Start</button>
 </div>
 
 {{else}}
 
-<div class="player_box five columns alpha omega">
+<div class="player_box five columns alpha ">
   <h3>{{host.username}} (HOST)</h3>
   	<!--disabled button-->
     <a href="/" class="btn btn-default btn-lg disabled">Start</a>
 </div>
 
-<div class="player_box five columns alpha omega" id="my_box">
+<div class="player_box five columns alpha " id="my_box">
   <h3>{{me.username}} (ME)</h3>
   <form id="ready_form">
     <button id="ready_button" class="btn btn-default btn-lg">Ready</button>
@@ -91,7 +91,7 @@ $(document).ready(function() {
 {{/if}}
 
 {{#each others}}
-<div class="player_box five columns alpha omega">
+<div class="player_box five columns alpha ">
  <h3>{{this.username}}</h3>
  {{#if this.isReady}}
   	<p>Ready to Go...</p>
@@ -104,7 +104,7 @@ $(document).ready(function() {
 {{#each hasUserName}}
 {{#if this}}
 {{else}}
-<div class="empty_player_box five columns alpha omega">
+<div class="empty_player_box five columns alpha ">
 	<h3>No player</h3>
   <p></p>
 </div>
@@ -137,5 +137,4 @@ $(document).ready(function() {
   </script>
 {{/if}}
 <a  href="/quit" class="btn btn-default"><img src="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-512.png" height="20"></a>
-
 </div>

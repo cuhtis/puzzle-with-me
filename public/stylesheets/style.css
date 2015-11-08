@@ -18,11 +18,14 @@ body {
   height:250px;
   margin:2px;
   border:2px solid #0099FF;
+  background-image: url("/img/gingham.jpg");
 }
 
 #message_box {
   height:472px;
   overflow-y: auto;
+    background: #ebf8ff;
+
 }
 
 .left_box {
@@ -38,7 +41,7 @@ body {
   height:250px;
   margin:2px;
   border:2px solid #0099FF;
-  background-color: #aaaaaa;
+  background-image: url("/img/BWgingham.jpg");
 }
 
 .error_text {
@@ -110,8 +113,12 @@ input {
 
 input[type=text],[type=number] {
   width: 30%;
-  line-height: 100%;
-  font-size: 20px;
+}
+
+input#copyURLText{
+    font-size: 20px;
+    margin-top: 15px;
+    vertical-align: bottom;
 }
 
 hr {
@@ -149,6 +156,7 @@ hr.threeFifths {
 
     .row                                        { margin-bottom: 20px; }
   
+    .container .offset-by-custom                { padding-left: 0px; }
 
     /* Nested Column Classes */ 
     .column.alpha, .columns.alpha               { margin-left: 0; }
