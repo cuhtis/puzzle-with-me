@@ -6,6 +6,7 @@ $(document).ready(function() {
   socket.on('newUser', function (data) {
     console.log(data.name, "has logged on.");
     $('#messages').append($('<li>').text(data.name + " has logged on."));
+    $('#message_box').scrollTop = elem.scrollHeight;
   });
   
   $('form').submit(function(){
@@ -19,6 +20,7 @@ $(document).ready(function() {
   
   socket.on('chat message', function(msg){
     $('#messages').append($('<li>').text(msg));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
 });
 </script>
@@ -48,8 +50,8 @@ $(document).ready(function() {
   </script>
 {{/if}}
 
-<div class="message_box">
-  <ul id="messages"></ul>
+<div class="left_box">
+  <div id="message_box"><ul id="messages"></ul></div>
   <form action="" style="bottom:0px">
     <input id="m" autocomplete="off" style="width:99%" />
   </form>

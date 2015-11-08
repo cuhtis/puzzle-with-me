@@ -25,7 +25,12 @@ body {
   border:2px solid #0099FF;
 }
 
-.riddle_box {
+#message_box {
+  height:472px;
+  overflow-y: auto;
+}
+
+.left_box {
   float: left;
   width: 40%;
   height:504px;
