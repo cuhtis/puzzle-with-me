@@ -208,25 +208,13 @@ app.get('/game/host/:session_id', function(req, res) {
 });
 
 app.post('/game/start/:session_id', function(req, res, next){
-  console.log("HELLOOOOO");
-  console.log(req.session.username);
-  console.log(req.params.session_id);
   Session.findOne({_id: req.params.session_id}, function(err, session){
-    Player.findOne({username: req.session.username}, function(err, player) {
-      player.ready = true;
-      session.num_ready += 1;
-      if (session.num_players > 1 && session.num_players == session.num_ready){
-        session.allReady = true;
-      }
-
-      player.save(function() {
-        session.save(function() {
-          console.log(player);
-          console.log(session);
-          res.redirect("/");
-        });
-      });
-    });
+    if (err) {
+    } else if (session.num_players > 1 && session.num_players == session.num_ready) {
+      res.redirect('/game/start/');
+    } else { 
+      res.redirect('/');
+    }
   });
 });
 
@@ -293,7 +281,6 @@ io.on('connection', function (socket) {
   });
 
   socket.on('notification_ready', function (data){
-    console.log(data.session_id);
     Session.findOne({_id: data.session_id}, function(err, session){
       if (err) console.log("error");
       var my_index = -1; var cnt = 0;
@@ -302,6 +289,7 @@ io.on('connection', function (socket) {
         cnt++;
       });
       session.players[my_index].isReady = true;
+      session.num_ready += 1;
       session.save(function(){
         io.emit('notification_ready', {username: data.username, isReady: true});
       });
