@@ -7,6 +7,7 @@ $(document).ready(function() {
     console.log(data.name, "has logged on.");
     $('#messages').append($('<li>').text(data.name + " has logged on."));
     $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+    
   });
   
   $('#message_form').submit(function(){
@@ -30,8 +31,10 @@ $(document).ready(function() {
   });
 
   $('#ready_form').submit(function(){
-    console.log("Hi");
     socket.emit('notification_ready', {session_id: '{{session_id}}', username:'{{me.username}}' });
+    var readyButton = document.getElementById("ready_button");
+    readyButton.className = readyButton.className + " disabled";
+    readyButton.disabled = true;
     return false;
   });
 
@@ -55,14 +58,11 @@ $(document).ready(function() {
 {{#if isHost}}
 <div class="player_box five columns alpha omega" id="my_box">
   <h3>{{host.username}} (HOST)</h3>
-  {{#if session.allReady}}
-      <a href="/play" class="big_button">Start</a>
-  {{else}}
-  		<button class="btn btn-default disabled btn-lg">Start</button>
-  {{/if}}
+  <button id="start" class="btn btn-default disabled btn-lg">Start</button>
 </div>
 
 {{else}}
+
 <div class="player_box five columns alpha omega">
   <h3>{{host.username}} (HOST)</h3>
   	<!--disabled button-->
@@ -72,9 +72,10 @@ $(document).ready(function() {
 <div class="player_box five columns alpha omega" id="my_box">
   <h3>{{me.username}} (ME)</h3>
   <form id="ready_form">
-    <button class="btn btn-default btn-lg">Ready</button>
+    <button id="ready_button" class="btn btn-default btn-lg">Ready</button>
   </form>
 </div>
+
 {{/if}}
 
 {{#each others}}
@@ -97,7 +98,9 @@ $(document).ready(function() {
 {{/if}}
 {{/each}}
 </div>
+
 <!-- END BOXES-->
+
 <div class = "fifteen columns">
 {{#if isHost}}
   <!-- Target -->
