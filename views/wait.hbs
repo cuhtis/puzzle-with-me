@@ -6,6 +6,7 @@ $(document).ready(function() {
   socket.on('newUser', function (data) {
     console.log(data.name, "has logged on.");
     $('#messages').append($('<li>').text(data.name + " has logged on."));
+    $('#message_box').scrollTop = elem.scrollHeight;
   });
   
   $('form').submit(function(){
@@ -19,6 +20,7 @@ $(document).ready(function() {
   
   socket.on('chat message', function(msg){
     $('#messages').append($('<li>').text(msg));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
 });
 </script>
@@ -27,10 +29,38 @@ $(document).ready(function() {
 
 <h3>{{host.username}}'s Game</h3>
 
+<<<<<<< HEAD
 <div class="message_box five columns" style="">
   <ul id="messages"></ul>
   <form action="" style="bottom:0px; ">
     <input id="m" autocomplete="off" style="width:99%;" />
+=======
+{{#if isHost}}
+  <!-- Target -->
+  <input id="copyURLText" value={{copyURL}}>
+
+  <!-- Trigger -->
+ <button class="btn" data-clipboard-target="#copyURLText">
+    <img src="https://zenorocha.github.io/clipboard.js/assets/images/clippy.svg" height="13" alt="Copy to clipboard">
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"> </script>
+  <script>
+    var clipboard = new Clipboard('.btn'); 
+    clipboard.on('success', function(e) {
+      console.log(e);
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
+{{/if}}
+
+<div class="left_box">
+  <div id="message_box"><ul id="messages"></ul></div>
+  <form action="" style="bottom:0px">
+    <input id="m" autocomplete="off" style="width:99%" />
+>>>>>>> 08059564951d3c2447f075e3440ed08ea769f126
   </form>
 </div>
 
