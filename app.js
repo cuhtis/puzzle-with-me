@@ -297,20 +297,26 @@ app.get('/game/results/:session_id', function(req, res) {
   });
 });
 
-
-
+var clients = [];
 io.on('connection', function (socket) {
   console.log('User connected, total online:', totalOnline);
   totalOnline += 1;
   
   socket.on('logon', function (data) {
     console.log(data.name, "has logged on.");
+    clients.push({ socket: socket, name: data.name });
     io.emit('newUser', { name: data.name, isReady: data.ready });
   });
 
   socket.on('disconnect', function () {
     console.log('user disconnected, total online:', totalOnline);
     totalOnline -= 1;
+    var i = clients.map(function (e) { return e.socket; }).indexOf(socket);
+    if (i > -1) {
+      var name = clients[i].name;
+      delete clients[i];
+      io.emit('deleteUser', { name: name });
+    }
   });
   
   socket.on('chat message', function(msg){

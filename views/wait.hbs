@@ -21,7 +21,22 @@ $(document).ready(function() {
       }
     } 
   });
-  
+ 
+  socket.on('deleteUser', function (data) {
+    console.log(data.name, "has logged off.");
+    $('#messages').append($('<li>').text(data.name + " has logged off."));
+    $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+    var boxes = $('#player_boxes').children();
+    for (var i = 0; i < 4; i++) {
+      if (boxes[i].getElementsByTagName('h3')[0].innerText === data.name) {
+        boxes[i].getElementsByTagName('h3')[0].innerText = "No player";
+        boxes[i].className = "empty_player_box five columns alpha omega";
+        boxes[i].getElementsByTagName('p')[0].innerText = "";
+        break;
+      }
+    } 
+  });
+ 
   $('#message_form').submit(function(){
     if($('#m').val() !== '') {
       console.log("sent message");
