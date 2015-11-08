@@ -104,10 +104,6 @@ app.post('/game/create', function(req, res) {
       allReady: false
     });
 
-    if (newSession.num_players > 1 && newSession.num_players == newSession.num_ready){
-      newSession.allReady = true;
-    }
-
     newSession.save(function(){
       req.session.username = req.body.username;
       req.session.activeSession = newSession.id;
@@ -211,7 +207,7 @@ app.get('/game/host/:session_id', function(req, res) {
   });
 });
 
-app.post('/game/join/:session_id', function(req, res){
+app.post('/game/start/:session_id', function(req, res, next){
   console.log("HELLOOOOO");
   console.log(req.session.username);
   console.log(req.params.session_id);
@@ -219,7 +215,7 @@ app.post('/game/join/:session_id', function(req, res){
     Player.findOne({username: req.session.username}, function(err, player) {
       player.ready = true;
       session.num_ready += 1;
-      if (session.num_players == session.num_ready){
+      if (session.num_players > 1 && session.num_players == session.num_ready){
         session.allReady = true;
       }
 
@@ -296,15 +292,20 @@ io.on('connection', function (socket) {
     io.emit('chat message', msg);
   });
 
-  socket.on('notification_ready', function (session_id, username){
-    Session.findOne({_id: session_id}, function(err, session){
-      for (var num_players = 0; num_players < session.num_players; num_players++){
-        if(session.players.username === username){
-          session.player.isReady = true;
-        }
-      }
+  socket.on('notification_ready', function (data){
+    console.log(data.session_id);
+    Session.findOne({_id: data.session_id}, function(err, session){
+      if (err) console.log("error");
+      var my_index = -1; var cnt = 0;
+      session.players.forEach(function(player){
+        if (player.username === data.username) { my_index = cnt; }
+        cnt++;
+      });
+      session.players[my_index].isReady = true;
+      session.save(function(){
+        io.emit('notification_ready', {username: data.username, isReady: true});
+      });
     });
-    io.emit('notification_ready', username, true);
   });
 
 });

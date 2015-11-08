@@ -23,13 +23,15 @@ $(document).ready(function() {
     $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
 
-  socket.on('notification_ready', function(username, is_ready){
-    $('#messages').append($('<li>').text(username + " is ready."));
+  socket.on('notification_ready', function(data){
+    console.log("Done");
+    $('#messages').append($('<li>').text(data.username + " is ready."));
     $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
   });
 
   $('#ready_form').submit(function(){
-    io.emit('notification_ready', {session: {{session}}, username:'{{me.username}}' });
+    console.log("Hi");
+    socket.emit('notification_ready', {session_id: '{{session_id}}', username:'{{me.username}}' });
     return false;
   });
 
