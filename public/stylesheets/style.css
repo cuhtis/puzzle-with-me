@@ -2,6 +2,7 @@ body, html {
   height:100%;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #000000;
+  background-color: #fafafa;
 }
 
 body {
@@ -10,7 +11,6 @@ body {
 
 .content {
   padding:30px;
-  background-color: #fafafa;
 }
 
 .player_box {
