@@ -248,7 +248,7 @@ app.get('/game/play/:session_id', function(req, res) {
                 }
               }
 
-              res.render('play', {session: session, question: result.question, me: my_player, others: other_players, hasUserName: hasUserName});
+              res.render('play', {session: session, question: result.question, answer: result.answer, me: my_player, others: other_players, hasUserName: hasUserName});
             }
           });
         }
@@ -322,6 +322,14 @@ io.on('connection', function (socket) {
   socket.on('chat message', function(msg){
     console.log(msg);
     io.emit('chat message', msg);
+  });
+
+  socket.on('got_answer', function() {
+    io.emit('end_game');
+  });
+
+  socket.on('notification_start', function () {
+    io.emit('start_game');
   });
 
   socket.on('notification_ready', function (data){

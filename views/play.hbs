@@ -1,33 +1,78 @@
+<script>
+$(document).ready(function() {
+  var socket = io();
+
+  $('#message_form').submit(function(){
+    if($('#m').val() !== '') {
+      $('#messages').append($('<li>').text($('#m').val()));
+      $('#message_box').animate({ scrollTop: $('#message_box')[0].scrollHeight }, "fast");
+      if($('#m').val() == '{{answer}}') {
+        io.emit('got_answer');
+      }
+      $('#m').val('');
+    }
+    return false;
+  });
+
+  socket.on('end_game', function() {
+    window.location.replace("/");
+  });
+
+});
+</script>
+
 <h1 class="title center">Puzzle With Me</h1>
 
 <p class="text center">{{timer}}</p>
 
-<div class="riddle_box">
-	<h3>puzzle</h3>
+<div class="left_box five columns">
+	<h3>Puzzle</h3>
   <p>{{question}}</p>
-</div>
-
-<div class="player_box" id="my_box">
-  <h3>{{me.username}}</h3>
-  <form method="POST">
-    <input type="text" name="answer">
-    <input type="submit">
+  <div id="message_box" style="height:385px"><ul id="messages"></ul></div>
+  <form id="message_form" style="bottom:0px">
+    <input id="m" autocomplete="off" style="width:99%" />
   </form>
 </div>
 
+<!-- section for the boxes-->
+<div id="player_boxes" class="ten columns">
+
+{{#if isHost}}
+<div class="player_box five columns alpha " id="my_box">
+  <h3>{{host.username}} (HOST)</h3>
+</div>
+
+{{else}}
+
+<div class="player_box five columns alpha ">
+  <h3>{{host.username}} (HOST)</h3>
+</div>
+
+<div class="player_box five columns alpha " id="my_box">
+  <h3>{{me.username}} (ME)</h3>
+</div>
+
+{{/if}}
+
 {{#each others}}
-<div class="player_box">
-	<h3>{{this.username}}</h3>
+<div class="player_box five columns alpha ">
+ <h3>{{this.username}}</h3>
 </div>
 {{/each}}
 
 {{#each hasUserName}}
 {{#if this}}
 {{else}}
-<div class="empty_player_box">
-	<h3>No player</h3>
+<div class="empty_player_box five columns alpha ">
+  <h3>No player</h3>
 </div>
 {{/if}}
 {{/each}}
 
-<a href="/" class="btn btn-default btn-lg">Quit</a>
+</div>
+
+<!-- END BOXES-->
+
+<div class = "fifteen columns">
+<a  href="/quit" class="btn btn-default"><img src="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-512.png" height="20"></a>
+</div>

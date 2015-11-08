@@ -71,8 +71,12 @@ $(document).ready(function() {
   });
 
   $('#start_form').submit(function(){
-    socket.emit('notification_ready', {session_id: '{{session_id}}', username:'{{me.username}}' });
+    socket.emit('notification_start');
     return false;
+  });
+
+  socket.on('start_game', function(){
+    window.location.replace("/game/play/{{session_id}}");
   });
 
   $('#ready_form').submit(function(){
