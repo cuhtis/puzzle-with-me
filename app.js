@@ -208,12 +208,14 @@ app.get('/game/host/:session_id', function(req, res) {
 });
 
 app.post('/game/start/:session_id', function(req, res, next){
+  console.log("hellooooo");
   Session.findOne({_id: req.params.session_id}, function(err, session){
     if (err) {
     } else if (session.num_players > 1 && session.num_players == session.num_ready) {
-      res.redirect('/game/start/');
+      session.allReady = true;
+      //res.redirect('/game/start/');
     } else { 
-      res.redirect('/');
+      //res.redirect('/');
     }
   });
 });
@@ -326,8 +328,17 @@ io.on('connection', function (socket) {
       });
       session.players[my_index].isReady = true;
       session.num_ready += 1;
+      
+      if (session.num_players > 1 && session.num_players == session.num_ready) {
+        session.allReady = true;
+      }
+      console.log(session.num_ready, session.num_players);
       session.save(function(){
         io.emit('notification_ready', {username: data.username, isReady: true});
+        if(session.allReady == true){
+          console.log("its TRUE");
+          io.emit('allReady');
+        }
       });
     });
   });
