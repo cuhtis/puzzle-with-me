@@ -35,4 +35,4 @@
 	-displays winner
 		-Winner/Loser labels for each player
 		-winner receives money through Venmo
-		-chat room to talk shit
+		-chat room to talk
