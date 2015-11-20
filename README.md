@@ -1,13 +1,22 @@
-<h1>Puzzle With Me</h1>
-<table>
-  <tr>
-    <td>YHacks</td>
-  </tr>
-  <tr>
-    <td>Nov 6th - Nov 8th, 2015</td>
-  </tr>
-  <tr>
-    <td>Curtis Li, Kristin Ho, Michelle Chen, Noah Cheng, Carter Yu</td>
-  </tr>
-</table>
+# Puzzle with Me
 
+Curtis Li, Michelle Chen, Kristin Ho, Noah Cheng, Carter Yu<br>
+YHacks 2015
+
+## Overview
+
+Puzzle with Me is a web application where friends can compete in riddles and puzzle-solving activities. Users can wager bets on games through venmo.
+
+## Stack
+
+<ul>
+<li> Javascript
+<li> Express / Node.js
+<li> MongoDB
+</ul>
+
+## APIs
+
+<ul>
+<li> Venmo
+</ul>
